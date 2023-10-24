@@ -1,0 +1,9 @@
+service_data:
+  address: localhost:8000
+
+source_data:
+  db_server: localhost
+  db_port: 3306
+  db_name: deptech
+  db_username: root
+  db_password: pass
