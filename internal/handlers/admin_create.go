@@ -22,6 +22,13 @@ func (h *Handler) CreateAdmin(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	err = h.v.Struct(param)
+	if err != nil {
+		log.Fatal(err)
+		rf.ResponseNOK(http.StatusBadRequest, err, w)
+		return
+	}
+
 	err = h.db.CreateAdmin(*param)
 	if err != nil {
 		log.Fatal(err)

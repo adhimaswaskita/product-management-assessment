@@ -13,6 +13,7 @@ func (h *Handler) GetProduct(w http.ResponseWriter, r *http.Request) {
 	data, err := h.db.GetProduct()
 	if err != nil {
 		rf.ResponseNOK(http.StatusInternalServerError, err, w)
+		return
 	}
 
 	log.Print("Success get product")

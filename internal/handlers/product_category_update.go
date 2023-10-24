@@ -29,6 +29,13 @@ func (h *Handler) UpdateProductCategory(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 
+	err = h.v.Struct(param)
+	if err != nil {
+		log.Fatal(err)
+		rf.ResponseNOK(http.StatusBadRequest, err, w)
+		return
+	}
+
 	err = h.db.UpdateProductCategory(uint(id), *param)
 	if err != nil {
 		log.Fatal(err)
