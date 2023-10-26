@@ -9,6 +9,7 @@ import (
 type IDB interface {
 	CreateAdmin(models.Admin) error
 	GetAdmin() ([]models.Admin, error)
+	GetAdminByEmailAndPassword(email, password string) (*models.Admin, error)
 	UpdateAdmin(uint, models.Admin) error
 	DeleteAdmin(id uint) error
 

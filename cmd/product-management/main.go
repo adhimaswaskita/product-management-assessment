@@ -7,6 +7,7 @@ import (
 	config "github.com/adhimaswaskita/go-product-management/configs"
 	"github.com/adhimaswaskita/go-product-management/internal/database"
 	"github.com/adhimaswaskita/go-product-management/internal/handlers"
+	m "github.com/adhimaswaskita/go-product-management/internal/middlewares"
 	"github.com/go-playground/validator"
 	"github.com/gorilla/mux"
 )
@@ -21,20 +22,21 @@ func SetupRouter(h handlers.IHandler) *mux.Router {
 
 	api := r.PathPrefix("/api").Subrouter()
 
-	api.HandleFunc("/admin", h.GetAdmin).Methods("GET")
-	api.HandleFunc("/admin", h.CreateAdmin).Methods("POST")
-	api.HandleFunc("/admin", h.UpdateAdmin).Methods("PUT")
-	api.HandleFunc("/admin", h.DeleteAdmin).Methods("DELETE")
+	api.HandleFunc("/login", h.Login).Methods(("POST"))
+	api.Handle("/admin", m.AuthMiddleware(http.HandlerFunc(h.GetAdmin))).Methods("GET")
+	api.Handle("/admin", m.AuthMiddleware(http.HandlerFunc(h.CreateAdmin))).Methods("POST")
+	api.Handle("/admin", m.AuthMiddleware(http.HandlerFunc(h.UpdateAdmin))).Methods("PUT")
+	api.Handle("/admin", m.AuthMiddleware(http.HandlerFunc(h.DeleteAdmin))).Methods("DELETE")
 
-	api.HandleFunc("/product-category", h.GetProductCategory).Methods("GET")
-	api.HandleFunc("/product-category", h.CreateProductCategory).Methods("POST")
-	api.HandleFunc("/product-category", h.UpdateProductCategory).Methods("PUT")
-	api.HandleFunc("/product-category", h.DeleteProductCategory).Methods("DELETE")
+	api.Handle("/product-category", m.AuthMiddleware(http.HandlerFunc(h.GetProductCategory))).Methods("GET")
+	api.Handle("/product-category", m.AuthMiddleware(http.HandlerFunc(h.CreateProductCategory))).Methods("POST")
+	api.Handle("/product-category", m.AuthMiddleware(http.HandlerFunc(h.UpdateProductCategory))).Methods("PUT")
+	api.Handle("/product-category", m.AuthMiddleware(http.HandlerFunc(h.DeleteProductCategory))).Methods("DELETE")
 
-	api.HandleFunc("/product", h.GetProduct).Methods("GET")
-	api.HandleFunc("/product", h.CreateProduct).Methods("POST")
-	api.HandleFunc("/product", h.UpdateProduct).Methods("PUT")
-	api.HandleFunc("/product", h.DeleteProduct).Methods("DELETE")
+	api.Handle("/product", m.AuthMiddleware(http.HandlerFunc(h.GetProduct))).Methods("GET")
+	api.Handle("/product", m.AuthMiddleware(http.HandlerFunc(h.CreateProduct))).Methods("POST")
+	api.Handle("/product", m.AuthMiddleware(http.HandlerFunc(h.UpdateProduct))).Methods("PUT")
+	api.Handle("/product", m.AuthMiddleware(http.HandlerFunc(h.DeleteProduct))).Methods("DELETE")
 
 	return r
 }

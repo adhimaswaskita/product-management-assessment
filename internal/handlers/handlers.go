@@ -15,6 +15,8 @@ type IHandler interface {
 	UpdateAdmin(w http.ResponseWriter, r *http.Request)
 	DeleteAdmin(w http.ResponseWriter, r *http.Request)
 
+	Login(w http.ResponseWriter, r *http.Request)
+
 	CreateProductCategory(w http.ResponseWriter, r *http.Request)
 	GetProductCategory(w http.ResponseWriter, r *http.Request)
 	UpdateProductCategory(w http.ResponseWriter, r *http.Request)
