@@ -26,6 +26,7 @@ type IHandler interface {
 	GetProduct(w http.ResponseWriter, r *http.Request)
 	UpdateProduct(w http.ResponseWriter, r *http.Request)
 	DeleteProduct(w http.ResponseWriter, r *http.Request)
+	UpdateProductStock(w http.ResponseWriter, r *http.Request)
 }
 
 // Handler holds the API endpoint's function handler.

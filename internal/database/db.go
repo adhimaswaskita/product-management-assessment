@@ -22,6 +22,7 @@ type IDB interface {
 	GetProduct() ([]models.Product, error)
 	UpdateProduct(uint, models.Product) error
 	DeleteProduct(id uint) error
+	UpdateProductStock(id uint, stock int) error
 }
 
 // NewDB initialize selected DB for bec-user

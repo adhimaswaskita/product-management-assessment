@@ -38,6 +38,8 @@ func SetupRouter(h handlers.IHandler) *mux.Router {
 	api.Handle("/product", m.AuthMiddleware(http.HandlerFunc(h.UpdateProduct))).Methods("PUT")
 	api.Handle("/product", m.AuthMiddleware(http.HandlerFunc(h.DeleteProduct))).Methods("DELETE")
 
+	api.Handle("/product/stock", m.AuthMiddleware(http.HandlerFunc(h.UpdateProductStock))).Methods("PUT")
+
 	return r
 }
 
